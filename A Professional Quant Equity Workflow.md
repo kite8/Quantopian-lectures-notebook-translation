@@ -12,7 +12,7 @@ By Jonathan Larkin, Chief Investment Officer at Quantopian
 [原文链接](https://blog.quantopian.com/a-professional-quant-equity-workflow/)
 
 
-在前面的[文章](https://blog.quantopian.com/the-foundation-of-algo-success/)中,我阐述了一个高夏普比率(Sharpe ratio)$^{[1]}$的量化投资策略的哲学基础.
+在前面的[文章](https://blog.quantopian.com/the-foundation-of-algo-success/)中,我阐述了一个高夏普比率(Sharpe ratio)<img src="http://latex.codecogs.com/gif.latex?$^{[1]}$" />的量化投资策略的哲学基础.
 
 
 今天我们将更加细致了解当下流行的投资流程,深入到量化投资的世界：cross-sectional equity investing,也被称作**股权统计套利**或者**股权市场中性投资**.
@@ -47,7 +47,7 @@ By Jonathan Larkin, Chief Investment Officer at Quantopian
 
 首先我们要从实际的情况出发,比如筛掉流动性不足的股票.对于筛选这件事,这里有一个不那么明显但是很关键的理由,成功的cross-sectional策略会让证券池的证券价格走势不要太相似,也不要差太远,保持一定的平衡.为了理性的对证券排名,cross-sectional策略需要衡量证券的相对价值,对用于排名维度数据需要做标准化处理.(归一化,特征缩放)
 
-在设计证券池时,你必须有自己的投资理念.想象一下接下来两个例子的场景.如果你的策略是基于股票隔夜信息内容来进行日内交易$^{[2]}$,对于ADRs这类证券必须清理掉.当信息扩散到ADR原发行地时(存在时差),我们的策略是依赖于美国证券交易所交易价格的投资者行为,这点在逻辑是不一致的.第二个例子,如果你的策略是基于财报数据,例如应计异象$^{[3]}$,你必须剔除掉不适用这类标准的股票(在这个例子中,比如银行股).
+在设计证券池时,你必须有自己的投资理念.想象一下接下来两个例子的场景.如果你的策略是基于股票隔夜信息内容来进行日内交易<img src="http://latex.codecogs.com/gif.latex?$^{[2]}$" />,对于ADRs这类证券必须清理掉.当信息扩散到ADR原发行地时(存在时差),我们的策略是依赖于美国证券交易所交易价格的投资者行为,这点在逻辑是不一致的.第二个例子,如果你的策略是基于财报数据,例如应计异象<img src="http://latex.codecogs.com/gif.latex?$^{[3]}$" />,你必须剔除掉不适用这类标准的股票(在这个例子中,比如银行股).
 
 ## Alpha Discovery (Alpha挖掘/因子挖掘) ##
 alpha可以理解为,当证券池中股票用cross-section策略进行交易时,以每只股票的相对回报组成的一个实数向量.一个alpha可以从一个线性序列中构建,也可以是没有维度的向量构建.Alphas也被叫做因子,在Quantopian中这两种叫法都是可以的.[Pipeline API](https://www.quantopian.com/tutorials/pipeline)将带你走进alpha建模的世界.在这一阶段,不要去考虑真实世界中的因素,比如交易,佣金或者风险.创建关于投资者行为,市场结构,信息不对称或市场低效率的任何其他潜在原因的假设,并看看该假设是否具有预测能力.需要一些点子?去Google或者[SSRN search](https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm)搜"equity market anomalies"吧.
@@ -55,7 +55,7 @@ alpha可以理解为,当证券池中股票用cross-section策略进行交易时,
 Alpha研究是艺术和科学的结合,也往往会发生神奇的事情.Alpha研究是一个不断迭代的过程：提出假设,检验假设,分析问题,修正假设.我们近期发布了一个新的开源计划,目前正在Quantopian Research进行测试,被称为[`alphaens`](https://www.quantopian.com/posts/alphalens-a-new-tool-for-analyzing-alpha-factors).你可以用`Pipeline API`去表达你的alpha,用`alphalens`去评估其效用.
 
 ## Alpha Combination (Alpha聚合/因子聚合) ##
-在今天的市场,很难用单因子(alpha)模型去撑起一个投资策略.一个成功的策略通常会有许多个独立的因子(alpha)；如果这些因子(alpha)够厉害,只需少量的因子就足矣.本阶段的目标是将多个正则化的因子(alpha)通过加权的方式,最终得到一个单因子,这个因子比之前最好的单因子预测能力还要强.加权的方式可以很简单：有时候通过加一个排名或者对因子(alpha)进行求平均,就是一个不错的解决方案.事实上,一个很流行的模型只是把[两个因子(alpha)](https://www.amazon.com/Little-Book-Still-Beats-Market/dp/0470624159/ref=sr_1_1?ie=UTF8&qid=1471483267&sr=8-1&keywords=the+little+book+that+beats+the+market)进行聚合.随着复杂度的增加,一些经典的投资组合理论能帮上忙；比如,在因子最终聚合加权方式上可以选择[马科维茨的均值一方差组合模型(lowest possible variance)](https://www.quantopian.com/posts/the-efficient-frontier-markowitz-portfolio-optimization-in-python-using-cvxopt). 最后(敲黑板！),现代的机器学习技术(深度学习&强化学习?)能帮助我们捕捉因子间复杂的关系.将你的因子转换成特征值,然后用机器学习算法去做分类,是当前很流行的一个研究方向$^{[4,5]}$.
+在今天的市场,很难用单因子(alpha)模型去撑起一个投资策略.一个成功的策略通常会有许多个独立的因子(alpha)；如果这些因子(alpha)够厉害,只需少量的因子就足矣.本阶段的目标是将多个正则化的因子(alpha)通过加权的方式,最终得到一个单因子,这个因子比之前最好的单因子预测能力还要强.加权的方式可以很简单：有时候通过加一个排名或者对因子(alpha)进行求平均,就是一个不错的解决方案.事实上,一个很流行的模型只是把[两个因子(alpha)](https://www.amazon.com/Little-Book-Still-Beats-Market/dp/0470624159/ref=sr_1_1?ie=UTF8&qid=1471483267&sr=8-1&keywords=the+little+book+that+beats+the+market)进行聚合.随着复杂度的增加,一些经典的投资组合理论能帮上忙；比如,在因子最终聚合加权方式上可以选择[马科维茨的均值一方差组合模型(lowest possible variance)](https://www.quantopian.com/posts/the-efficient-frontier-markowitz-portfolio-optimization-in-python-using-cvxopt). 最后(敲黑板！),现代的机器学习技术(深度学习&强化学习?)能帮助我们捕捉因子间复杂的关系.将你的因子转换成特征值,然后用机器学习算法去做分类,是当前很流行的一个研究方向<img src="http://latex.codecogs.com/gif.latex?$^{[4,5]}$" />.
 
 ## Portfolio Construction (创建投资组合) ##
 到这个阶段之前,我们都只是在做研究,没有进行实操.之前的步骤都是在研究,这项工作最好在非结构化的Quantopian [Research environment](https://www.quantopian.com/research),因为这里可以快速验证你的想法.此时问题发生了变化：我们已经有了一个最终的alpha向量,我们需要把它用于结构化的真实世界中的投资组合进行交易,获取利润.我们在每次迭代中重复如下步骤：我们计算alphas,并聚合成一个最终alpha,在前一次迭代中的投资组合基础上,用我们最终alpha去计算一个理想化的投资组合,生成一个换仓列表,将前一时刻的投资组合逐步替换成理想化的投资组合.
