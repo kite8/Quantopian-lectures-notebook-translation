@@ -31,7 +31,7 @@ By Jonathan Larkin, Chief Investment Officer at Quantopian
 - Trading
 
 每个阶段的成功是策略成功的必要条件,但不是充分条件.只有在每个阶段中审慎和周到做好决策,才能使得策略能良好的运作.流程图如下：
-![image](\image\workflow.jpg)
+![image](https://github.com/kite8/Quantopian-lectures-notebook-translation/blob/master/image/workflow.jpg)
 
 ## Data (数据) ##
 
